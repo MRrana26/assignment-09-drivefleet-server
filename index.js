@@ -52,7 +52,7 @@ const verifyToken = async (req, res, next) => {
 
 async function run() {
   try {
-    await client.connect();
+    // await client.connect();
 
     const db = client.db("drive-fleet-car-rental");
     const availableCarsCollection = db.collection("available-cars");
@@ -77,7 +77,7 @@ async function run() {
     });
 
   
-    app.get("/available-cars/:id", verifyToken, async (req, res) => {
+    app.get("/cars/:id", verifyToken, async (req, res) => {
       try {
         const { id } = req.params;
         const result = await availableCarsCollection.findOne({
@@ -90,7 +90,7 @@ async function run() {
       }
     });
 
-    console.log("MongoDB connected successfully");
+    // console.log("MongoDB connected successfully");
   } catch (err) {
     console.error(err);
   }
