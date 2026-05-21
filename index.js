@@ -77,7 +77,7 @@ async function run() {
     });
 
   
-    app.get("/cars/:id", verifyToken, async (req, res) => {
+    app.get("/available-cars/:id", verifyToken, async (req, res) => {
       try {
         const { id } = req.params;
         const result = await availableCarsCollection.findOne({
