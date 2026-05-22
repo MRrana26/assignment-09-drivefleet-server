@@ -56,6 +56,7 @@ async function run() {
 
     const db = client.db("drive-fleet-car-rental");
     const availableCarsCollection = db.collection("available-cars");
+    const bookingCollection = db.collection('bookings');
 
     app.post("/add-car", async (req, res) => {
       try {
@@ -75,6 +76,15 @@ async function run() {
         res.status(500).json({ error: err.message });
       }
     });
+
+
+    app.post("/bookings", async (req, res) => {
+      const bookingData = req.body;
+      const result = await bookingCollection.insertOne(bookingData)
+      res.json(result)
+    })
+
+    
 
   
     app.get("/available-cars/:id", verifyToken, async (req, res) => {
